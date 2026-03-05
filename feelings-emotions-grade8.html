@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feelings & Emotions – Grade 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf8f4;
+    --cream: #f0ebe0;
+    --accent: #c0392b;
+    --accent2: #e67e22;
+    --teal: #16a085;
+    --gold: #f39c12;
+    --soft: #8e9ab0;
+    --card: #ffffff;
+    --border: #ddd8ce;
+    --success: #27ae60;
+    --warning: #e67e22;
+    --danger: #c0392b;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(192,57,43,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 100%, rgba(22,160,133,0.06) 0%, transparent 50%);
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: white;
+    padding: 52px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '💭';
+    position: absolute;
+    font-size: 180px;
+    opacity: 0.05;
+    right: 20px;
+    top: -20px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    margin-top: 24px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .hero-meta span {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* WORD BANK */
+  .wordbank-section {
+    margin: 32px auto;
+    max-width: 860px;
+    padding: 0 20px;
+  }
+  .wordbank-card {
+    background: var(--ink);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    color: white;
+  }
+  .wordbank-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .wordbank-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .word-chip {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .word-chip:hover { background: rgba(255,255,255,0.2); }
+  .word-chip.used { background: var(--teal); border-color: var(--teal); opacity: 0.7; }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    max-width: 860px;
+    margin: 0 auto 28px;
+    padding: 0 20px;
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--soft);
+    margin-bottom: 8px;
+  }
+  .progress-track {
+    height: 6px;
+    background: var(--cream);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* PARTS */
+  .parts-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .part-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .part-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .part-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+    font-family: 'Playfair Display', serif;
+  }
+  .part-a .part-num { background: #fdecea; color: var(--accent); }
+  .part-b .part-num { background: #fef9e7; color: var(--gold); }
+  .part-c .part-num { background: #e8f8f5; color: var(--teal); }
+  .part-d .part-num { background: #eaf0fb; color: #2980b9; }
+  .part-e .part-num { background: #f4edf9; color: #8e44ad; }
+
+  .part-title-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .part-title-block p {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.5;
+  }
+  .tip-box {
+    background: #fffbf0;
+    border-left: 3px solid var(--gold);
+    padding: 10px 16px;
+    margin: 0 24px 20px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: #7d6608;
+  }
+
+  /* ITEMS */
+  .items-list { padding: 0 24px 24px; }
+  .item-block {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .item-block:last-child { border-bottom: none; }
+  .item-question {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 14px;
+    color: var(--ink);
+    display: flex;
+    gap: 10px;
+  }
+  .item-num {
+    background: var(--cream);
+    color: var(--soft);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    height: fit-content;
+    margin-top: 2px;
+  }
+
+  /* SENTENCE FRAME */
+  .sentence-frame {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ink);
+  }
+  .frame-text { color: var(--soft); font-style: italic; }
+  .fill-input {
+    display: inline-block;
+    border: none;
+    border-bottom: 2px solid var(--accent);
+    background: transparent;
+    min-width: 120px;
+    padding: 2px 6px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .fill-input:focus { border-color: var(--teal); }
+  .fill-input.wide { min-width: 220px; }
+  .fill-input.xwide { min-width: 320px; }
+
+  /* SELECT */
+  .feel-select {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    background: white;
+    color: var(--ink);
+    cursor: pointer;
+    outline: none;
+    min-width: 180px;
+    transition: border-color 0.2s;
+  }
+  .feel-select:focus { border-color: var(--accent); }
+
+  /* INTENSITY STARS */
+  .intensity-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  .intensity-label { font-size: 13px; color: var(--soft); min-width: 50px; }
+  .star-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    filter: grayscale(1);
+    transition: filter 0.15s, transform 0.1s;
+    padding: 2px;
+  }
+  .star-btn.active { filter: grayscale(0); }
+  .star-btn:hover { transform: scale(1.2); }
+
+  /* TEXTAREA */
+  .big-textarea {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    min-height: 160px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .big-textarea:focus { border-color: var(--teal); }
+
+  /* FEEDBACK */
+  .feedback-box {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.ok { background: #eafaf1; border-left: 3px solid var(--success); color: #1a5e35; }
+  .feedback-box.warn { background: #fef9e7; border-left: 3px solid var(--gold); color: #7d6608; }
+  .feedback-box.err { background: #fdedec; border-left: 3px solid var(--danger); color: #7b241c; }
+  .feedback-box.info { background: #eaf2fb; border-left: 3px solid #2980b9; color: #1a4f6e; }
+
+  /* CHECK BUTTON */
+  .check-btn {
+    margin-top: 14px;
+    background: var(--ink);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .check-btn:hover { background: var(--accent); transform: translateY(-1px); }
+  .check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .spinner { display: none; }
+  .check-btn.loading .spinner { display: inline-block; animation: spin 0.8s linear infinite; }
+  .check-btn.loading .btn-text { opacity: 0.5; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* SUBMIT SECTION */
+  .submit-section {
+    background: var(--ink);
+    color: white;
+    border-radius: var(--radius);
+    padding: 36px;
+    text-align: center;
+    margin: 32px 0 0;
+  }
+  .submit-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .submit-section p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .submit-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    border-radius: 30px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(192,57,43,0.3);
+    letter-spacing: 0.5px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(192,57,43,0.4); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* SCORE PANEL */
+  #score-panel {
+    display: none;
+    max-width: 860px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+  }
+  .score-card {
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-card.pass {
+    background: linear-gradient(135deg, #1a3c34, #0f2027);
+    color: white;
+  }
+  .score-card.fail {
+    background: linear-gradient(135deg, #3c1a1a, #2d0f0f);
+    color: white;
+  }
+  .score-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1;
+    margin: 16px 0 8px;
+  }
+  .score-card.pass .score-number { color: #2ecc71; }
+  .score-card.fail .score-number { color: #e74c3c; }
+  .score-label {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .score-msg {
+    font-size: 18px;
+    margin: 16px 0;
+    font-weight: 600;
+  }
+  .score-detail {
+    font-size: 14px;
+    opacity: 0.7;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+  .retry-btn {
+    background: white;
+    color: var(--ink);
+    border: none;
+    padding: 12px 36px;
+    border-radius: 24px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+  /* PART B */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .part-b-item {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .part-b-item label {
+    font-size: 13px;
+    color: var(--soft);
+    margin-bottom: 6px;
+    display: block;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* PART C */
+  .scale-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 10px 0;
+  }
+  .scale-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .scale-btn:hover { border-color: var(--teal); background: #e8f8f5; }
+  .scale-btn.selected { background: var(--teal); color: white; border-color: var(--teal); }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--soft);
+    margin-top: 4px;
+  }
+
+  /* SECTION SELECTOR */
+  .choose-banner {
+    background: #f0f4ff;
+    border: 1px dashed #a0b0d0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #2c3e50;
+    margin-bottom: 16px;
+  }
+
+  .situation-select {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    background: white;
+    min-width: 200px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    margin-bottom: 10px;
+  }
+  .situation-select:focus { border-color: var(--teal); }
+
+  /* HIGHLIGHT CHECKS */
+  .char-counter {
+    font-size: 12px;
+    color: var(--soft);
+    text-align: right;
+    margin-top: 4px;
+  }
+
+  .loading-overlay {
+    position: fixed; inset: 0;
+    background: rgba(26,26,46,0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999;
+    display: none;
+  }
+  .loading-box {
+    background: white;
+    border-radius: 16px;
+    padding: 36px 48px;
+    text-align: center;
+  }
+  .loading-box p { margin-top: 14px; font-weight: 600; color: var(--ink); }
+  .big-spinner {
+    width: 44px; height: 44px;
+    border: 4px solid var(--cream);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-box">
+    <div class="big-spinner"></div>
+    <p>Marking your work…<br><small style="color:var(--soft)">This may take a moment</small></p>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">English · Grade 8 · Advanced</div>
+  <h1>Feelings &amp; Emotions</h1>
+  <p>Explore the full spectrum of human emotion through precise vocabulary, conditional grammar, and nuanced expression.</p>
+  <div class="hero-meta">
+    <span>📖 5 Parts</span>
+    <span>⏱ ~45 minutes</span>
+    <span>🎯 Pass mark: 80</span>
+  </div>
+</div>
+
+<!-- WORD BANK -->
+<div class="wordbank-section">
+  <div class="wordbank-card">
+    <h3>📚 Word Bank – click to copy</h3>
+    <div class="wordbank-grid" id="wordBank">
+      <span class="word-chip" onclick="copyWord(this)">disappointed</span>
+      <span class="word-chip" onclick="copyWord(this)">devastated</span>
+      <span class="word-chip" onclick="copyWord(this)">embarrassed</span>
+      <span class="word-chip" onclick="copyWord(this)">thrilled</span>
+      <span class="word-chip" onclick="copyWord(this)">relieved</span>
+      <span class="word-chip" onclick="copyWord(this)">anxious</span>
+      <span class="word-chip" onclick="copyWord(this)">overwhelmed</span>
+      <span class="word-chip" onclick="copyWord(this)">furious</span>
+      <span class="word-chip" onclick="copyWord(this)">betrayed</span>
+      <span class="word-chip" onclick="copyWord(this)">proud</span>
+      <span class="word-chip" onclick="copyWord(this)">grateful</span>
+      <span class="word-chip" onclick="copyWord(this)">uneasy</span>
+      <span class="word-chip" onclick="copyWord(this)">shocked</span>
+      <span class="word-chip" onclick="copyWord(this)">heartbroken</span>
+      <span class="word-chip" onclick="copyWord(this)">frustrated</span>
+      <span class="word-chip" onclick="copyWord(this)">confident</span>
+      <span class="word-chip" onclick="copyWord(this)">exhausted</span>
+      <span class="word-chip" onclick="copyWord(this)">excited</span>
+      <span class="word-chip" onclick="copyWord(this)">tense</span>
+      <span class="word-chip" onclick="copyWord(this)">hopeful</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar-wrap">
+  <div class="progress-info">
+    <span>Progress</span>
+    <span id="progressPct">0% complete</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<!-- PARTS CONTAINER -->
+<div class="parts-container">
+
+  <!-- PART A -->
+  <div class="part-card part-a">
+    <div class="part-header">
+      <div class="part-num">A</div>
+      <div class="part-title-block">
+        <h2>Choose + Justify</h2>
+        <p>Choose a feeling, write a justification using <em>because / since / as / so</em>, and add an intensifier.</p>
+      </div>
+    </div>
+    <div class="tip-box">
+      💡 Use the frame: <strong>I would feel ________ because ________.</strong> I would be <em>(slightly / fairly / really / extremely / absolutely)</em> ________.
+    </div>
+    <div class="items-list" id="partA-items"></div>
+  </div>
+
+  <!-- PART B -->
+  <div class="part-card part-b">
+    <div class="part-header">
+      <div class="part-num">B</div>
+      <div class="part-title-block">
+        <h2>Upgrade the Language</h2>
+        <p>Pick <strong>5</strong> situations. Write two emotions and explain the difference.</p>
+      </div>
+    </div>
+    <div class="tip-box">
+      💡 Frame: <em>I might feel ________, but I could also feel ________. The difference is that ________.</em>
+    </div>
+    <div class="items-list" id="partB-items"></div>
+  </div>
+
+  <!-- PART C -->
+  <div class="part-card part-c">
+    <div class="part-header">
+      <div class="part-num">C</div>
+      <div class="part-title-block">
+        <h2>Intensity Scale</h2>
+        <p>Choose <strong>6</strong> situations. Rate them 1–5, then write a sentence with a stronger emotion.</p>
+      </div>
+    </div>
+    <div class="tip-box">
+      💡 Frame: <em>At first I would feel ________, but if ________, I would become ________.</em>
+    </div>
+    <div class="items-list" id="partC-items"></div>
+  </div>
+
+  <!-- PART D -->
+  <div class="part-card part-d">
+    <div class="part-header">
+      <div class="part-num">D</div>
+      <div class="part-title-block">
+        <h2>Conditional Challenge</h2>
+        <p>Pick <strong>4</strong> situations and use a conditional: <em>If + Past Simple</em> or <em>If + Past Perfect</em>.</p>
+      </div>
+    </div>
+    <div class="tip-box">
+      💡 Frames: <em>"If ________, I would probably ________."</em> &nbsp;/&nbsp; <em>"If ________ had happened, I would have ________."</em>
+    </div>
+    <div class="items-list" id="partD-items"></div>
+  </div>
+
+  <!-- PART E -->
+  <div class="part-card part-e">
+    <div class="part-header">
+      <div class="part-num">E</div>
+      <div class="part-title-block">
+        <h2>Mini Paragraph</h2>
+        <p>Choose ONE situation and write 8–10 lines including <strong>3 emotion words</strong>, <strong>1 intensifier</strong>, and <strong>1 contrast word</strong>.</p>
+      </div>
+    </div>
+    <div class="tip-box">
+      💡 Contrast words: <em>however / although / on the other hand</em>
+    </div>
+    <div class="items-list">
+      <div class="item-block">
+        <div class="item-question">
+          <span class="item-num">1</span>
+          <span>Choose your situation:</span>
+        </div>
+        <select class="situation-select" id="partE-sit">
+          <option value="">— choose a situation —</option>
+          <option value="everyone forgot your birthday">Everyone forgot your birthday</option>
+          <option value="you won the lottery">You won the lottery</option>
+          <option value="you had an important test tomorrow">Important test tomorrow</option>
+          <option value="you found out you were adopted">You found out you were adopted</option>
+          <option value="you were going on holiday tomorrow">Going on holiday tomorrow</option>
+          <option value="you had just run 10 kilometres">Just ran 10 kilometres</option>
+          <option value="someone stole your wallet">Someone stole your wallet</option>
+          <option value="your father went missing">Your father went missing</option>
+          <option value="you got 100% on a test">Got 100% on a test</option>
+          <option value="you got lost in the desert">Got lost in the desert</option>
+          <option value="you could meet your favourite celebrity">Meet your favourite celebrity</option>
+          <option value="you won first prize in a competition">Won first prize in competition</option>
+          <option value="you bought a car and it broke down the next day">Car broke down after you bought it</option>
+          <option value="everyone asked for your advice">Everyone asked for your advice</option>
+        </select>
+        <textarea class="big-textarea" id="partE-text" placeholder="Write your mini paragraph here (8–10 lines)..." oninput="updateCounter('partE-text','partE-counter'); updateProgress()"></textarea>
+        <div class="char-counter" id="partE-counter">0 words</div>
+        <button class="check-btn" onclick="checkPartE(this)">
+          <span class="spinner">⟳</span>
+          <span class="btn-text">✦ Check my paragraph</span>
+        </button>
+        <div class="feedback-box" id="partE-fb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <h3>Ready to submit?</h3>
+    <p>Make sure you've completed all parts. Your work will be reviewed and scored out of 100.</p>
+    <button class="submit-btn" id="submitBtn" onclick="submitAll()">📝 Submit for Final Score</button>
+  </div>
+
+</div>
+
+<!-- SCORE PANEL -->
+<div id="score-panel">
+  <div class="score-card" id="scoreCard">
+    <div class="score-label">Final Score</div>
+    <div class="score-number" id="scoreNum">—</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <div class="score-detail" id="scoreDetail"></div>
+    <button class="retry-btn" id="retryBtn" onclick="retryExam()" style="display:none">🔄 Review &amp; Try Again</button>
+  </div>
+</div>
+
+<script>
+const SITUATIONS = [
+  "everyone forgot your birthday",
+  "you won the lottery",
+  "you had an important test tomorrow",
+  "you found out you were adopted",
+  "you were going on holiday tomorrow",
+  "you had just run 10 kilometres",
+  "someone stole your wallet",
+  "your father went missing",
+  "you got 100% on a test",
+  "you got bad medical news",
+  "you got lost in the desert",
+  "you could meet your favourite celebrity",
+  "you won first prize in a competition",
+  "you bought a car and it broke down the next day",
+  "everyone asked for your advice"
+];
+
+const WORDBANK = ["disappointed","devastated","embarrassed","thrilled","relieved","anxious","overwhelmed","furious","betrayed","proud","grateful","uneasy","shocked","heartbroken","frustrated","confident","exhausted","excited","tense","hopeful"];
+const INTENSIFIERS = ["slightly","fairly","really","extremely","absolutely","pretty","quite","very","deeply","utterly","incredibly"];
+
+// ── BUILD PART A ──
+function buildPartA() {
+  const container = document.getElementById('partA-items');
+  SITUATIONS.forEach((sit, i) => {
+    const div = document.createElement('div');
+    div.className = 'item-block';
+    div.innerHTML = `
+      <div class="item-question">
+        <span class="item-num">${i+1}</span>
+        <span>…${sit}.</span>
+      </div>
+      <div class="sentence-frame">
+        <span class="frame-text">I would feel </span>
+        <input class="fill-input" id="a${i}-feel" placeholder="emotion" oninput="updateProgress()" list="wb-list">
+        <span class="frame-text"> because </span>
+        <input class="fill-input wide" id="a${i}-because" placeholder="your reason..." oninput="updateProgress()">
+        <span class="frame-text">. I would be </span>
+        <input class="fill-input" id="a${i}-int" placeholder="intensifier" oninput="updateProgress()" list="int-list">
+        <span class="frame-text"> </span>
+        <input class="fill-input" id="a${i}-feel2" placeholder="emotion" oninput="updateProgress()" list="wb-list">
+        <span class="frame-text">.</span>
+      </div>
+      <button class="check-btn" onclick="checkPartA(this, ${i})">
+        <span class="spinner">⟳</span>
+        <span class="btn-text">✦ Check</span>
+      </button>
+      <div class="feedback-box" id="a${i}-fb"></div>`;
+    container.appendChild(div);
+  });
+}
+
+// ── BUILD PART B ──
+function buildPartB() {
+  const container = document.getElementById('partB-items');
+  container.innerHTML = `<div class="choose-banner">📌 Choose any <strong>5</strong> situations from the list below and complete each one.</div>`;
+  for (let i=0; i<5; i++) {
+    const div = document.createElement('div');
+    div.className = 'part-b-item';
+    div.innerHTML = `
+      <label>Situation ${i+1}</label>
+      <select class="situation-select" id="b${i}-sit" onchange="updateProgress()">
+        <option value="">— choose situation —</option>
+        ${SITUATIONS.map(s=>`<option value="${s}">…${s}</option>`).join('')}
+      </select>
+      <div class="sentence-frame">
+        <span class="frame-text">I might feel </span>
+        <input class="fill-input" id="b${i}-em1" placeholder="emotion 1" list="wb-list" oninput="updateProgress()">
+        <span class="frame-text">, but I could also feel </span>
+        <input class="fill-input" id="b${i}-em2" placeholder="emotion 2" list="wb-list" oninput="updateProgress()">
+        <span class="frame-text">. The difference is that </span>
+        <input class="fill-input xwide" id="b${i}-diff" placeholder="explain the difference..." oninput="updateProgress()">
+        <span class="frame-text">.</span>
+      </div>
+      <button class="check-btn" onclick="checkPartB(this, ${i})">
+        <span class="spinner">⟳</span><span class="btn-text">✦ Check</span>
+      </button>
+      <div class="feedback-box" id="b${i}-fb"></div>`;
+    container.appendChild(div);
+  }
+}
+
+// ── BUILD PART C ──
+function buildPartC() {
+  const container = document.getElementById('partC-items');
+  container.innerHTML = `<div class="choose-banner">📌 Choose any <strong>6</strong> situations and rate them, then write a conditional sentence.</div>`;
+  for (let i=0; i<6; i++) {
+    const div = document.createElement('div');
+    div.className = 'item-block';
+    div.innerHTML = `
+      <div class="item-question"><span class="item-num">${i+1}</span><span>Choose a situation:</span></div>
+      <select class="situation-select" id="c${i}-sit" onchange="updateProgress()">
+        <option value="">— choose situation —</option>
+        ${SITUATIONS.map(s=>`<option value="${s}">…${s}</option>`).join('')}
+      </select>
+      <div class="scale-row">
+        <span class="intensity-label">Intensity:</span>
+        ${[1,2,3,4,5].map(n=>`<button class="scale-btn" id="c${i}-star${n}" onclick="setScale(${i},${n})" title="Level ${n}">${n}</button>`).join('')}
+        <span style="font-size:13px;color:var(--soft);margin-left:8px" id="c${i}-scale-val"></span>
+      </div>
+      <div class="scale-labels" style="width:196px;margin-left:58px"><span>mild</span><span>extreme</span></div>
+      <div class="sentence-frame" style="margin-top:10px">
+        <span class="frame-text">At first I would feel </span>
+        <input class="fill-input" id="c${i}-em1" placeholder="emotion" list="wb-list" oninput="updateProgress()">
+        <span class="frame-text">, but if </span>
+        <input class="fill-input wide" id="c${i}-cond" placeholder="condition..." oninput="updateProgress()">
+        <span class="frame-text">, I would become </span>
+        <input class="fill-input" id="c${i}-em2" placeholder="stronger emotion" list="wb-list" oninput="updateProgress()">
+        <span class="frame-text">.</span>
+      </div>
+      <button class="check-btn" onclick="checkPartC(this,${i})">
+        <span class="spinner">⟳</span><span class="btn-text">✦ Check</span>
+      </button>
+      <div class="feedback-box" id="c${i}-fb"></div>`;
+    container.appendChild(div);
+  }
+}
+
+// ── BUILD PART D ──
+function buildPartD() {
+  const container = document.getElementById('partD-items');
+  container.innerHTML = `<div class="choose-banner">📌 Choose any <strong>4</strong> situations and write a conditional sentence.</div>`;
+  for (let i=0; i<4; i++) {
+    const div = document.createElement('div');
+    div.className = 'item-block';
+    div.innerHTML = `
+      <div class="item-question"><span class="item-num">${i+1}</span><span>Choose a situation:</span></div>
+      <select class="situation-select" id="d${i}-sit" onchange="updateProgress()">
+        <option value="">— choose situation —</option>
+        ${SITUATIONS.map(s=>`<option value="${s}">…${s}</option>`).join('')}
+      </select>
+      <div style="margin:10px 0 6px; font-size:13px; color:var(--soft)">Choose conditional type:</div>
+      <select class="feel-select" id="d${i}-type" style="margin-bottom:10px; font-size:13px">
+        <option value="present">Type 1: If + Past Simple → would + verb</option>
+        <option value="past">Type 2: If + Past Perfect → would have + p.p.</option>
+      </select>
+      <textarea class="big-textarea" style="min-height:90px" id="d${i}-sent" placeholder='e.g. "If I had known about the lottery, I would have bought a ticket sooner."' oninput="updateProgress()"></textarea>
+      <button class="check-btn" onclick="checkPartD(this,${i})">
+        <span class="spinner">⟳</span><span class="btn-text">✦ Check</span>
+      </button>
+      <div class="feedback-box" id="d${i}-fb"></div>`;
+    container.appendChild(div);
+  }
+}
+
+// Scale
+const scaleVals = {};
+function setScale(i, n) {
+  scaleVals[i] = n;
+  const labels = ['','mild','fairly mild','moderate','quite strong','extreme'];
+  document.getElementById(`c${i}-scale-val`).textContent = `→ ${labels[n]}`;
+  for (let j=1; j<=5; j++) {
+    document.getElementById(`c${i}-star${j}`).classList.toggle('selected', j<=n);
+  }
+  updateProgress();
+}
+
+// Word counter
+function updateCounter(textId, counterId) {
+  const val = document.getElementById(textId).value.trim();
+  const words = val ? val.split(/\s+/).length : 0;
+  document.getElementById(counterId).textContent = `${words} word${words!==1?'s':''}`;
+}
+
+// Copy word from wordbank
+function copyWord(chip) {
+  navigator.clipboard.writeText(chip.textContent).catch(()=>{});
+  chip.classList.add('used');
+  setTimeout(()=>chip.classList.remove('used'), 1500);
+}
+
+// Progress tracking
+function updateProgress() {
+  let filled = 0, total = 0;
+  // Part A: 15 items × 4 fields = 60
+  for (let i=0; i<15; i++) {
+    ['feel','because','int','feel2'].forEach(f => {
+      total++;
+      if ((document.getElementById(`a${i}-${f}`)?.value||'').trim()) filled++;
+    });
+  }
+  // Part B: 5 items × 4 fields
+  for (let i=0; i<5; i++) {
+    ['sit','em1','em2','diff'].forEach(f => {
+      total++;
+      if ((document.getElementById(`b${i}-${f}`)?.value||'').trim()) filled++;
+    });
+  }
+  // Part C: 6 items × 3 fields + scale
+  for (let i=0; i<6; i++) {
+    ['sit','em1','cond','em2'].forEach(f => { total++; if((document.getElementById(`c${i}-${f}`)?.value||'').trim()) filled++; });
+    total++; if(scaleVals[i]) filled++;
+  }
+  // Part D: 4 items
+  for (let i=0; i<4; i++) {
+    ['sit','sent'].forEach(f => { total++; if((document.getElementById(`d${i}-${f}`)?.value||'').trim()) filled++; });
+  }
+  // Part E
+  total += 2;
+  if((document.getElementById('partE-sit')?.value||'').trim()) filled++;
+  if((document.getElementById('partE-text')?.value||'').trim().split(/\s+/).length > 5) filled++;
+
+  const pct = Math.round((filled/total)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressPct').textContent = pct+'% complete';
+}
+
+// ── AI CHECK HELPERS ──
+async function callClaude(prompt) {
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      system: `You are a helpful, encouraging English teacher grading Grade 8 students' work on feelings and emotions. 
+Give concise, specific feedback. Be lenient with minor spelling/grammar if the meaning is clear.
+Accept any logically appropriate emotion word (not just the "ideal" answer).
+Always respond in JSON only. No preamble, no markdown.`,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  const data = await res.json();
+  const text = data.content.map(b => b.text||'').join('');
+  return JSON.parse(text.replace(/```json|```/g,'').trim());
+}
+
+function setBtnLoading(btn, on) {
+  btn.disabled = on;
+  btn.classList.toggle('loading', on);
+}
+
+function showFeedback(id, type, text) {
+  const el = document.getElementById(id);
+  el.className = `feedback-box show ${type}`;
+  el.innerHTML = text;
+}
+
+// ── CHECK PART A ──
+async function checkPartA(btn, i) {
+  const feel = document.getElementById(`a${i}-feel`).value.trim();
+  const because = document.getElementById(`a${i}-because`).value.trim();
+  const intens = document.getElementById(`a${i}-int`).value.trim();
+  const feel2 = document.getElementById(`a${i}-feel2`).value.trim();
+  if (!feel || !because || !intens || !feel2) {
+    showFeedback(`a${i}-fb`,'warn','⚠️ Please fill in all four blanks first.'); return;
+  }
+  setBtnLoading(btn, true);
+  try {
+    const result = await callClaude(`
+Situation: "…${SITUATIONS[i]}"
+Student wrote: "I would feel ${feel} because ${because}. I would be ${intens} ${feel2}."
+Word bank: ${WORDBANK.join(', ')}
+Intensifiers allowed: ${INTENSIFIERS.join(', ')}
+
+Evaluate:
+1. Is "${feel}" an appropriate emotion for this situation? (be lenient — accept any reasonable emotion)
+2. Is the "because" justification logical?
+3. Is "${intens}" a valid intensifier?
+4. Does the second emotion word make sense?
+5. Is the grammar correct?
+
+Reply JSON: { "ok": true/false, "score": 0-10, "feedback": "brief encouraging note max 2 sentences", "suggestion": "one specific improvement if needed or empty string" }`);
+    const cls = result.ok ? 'ok' : (result.score >= 6 ? 'warn' : 'err');
+    let msg = `<strong>${result.ok ? '✅' : '⚠️'} ${result.score}/10</strong> — ${result.feedback}`;
+    if (result.suggestion) msg += `<br><em>💡 ${result.suggestion}</em>`;
+    showFeedback(`a${i}-fb`, cls, msg);
+  } catch(e) {
+    showFeedback(`a${i}-fb`,'warn','Could not connect to feedback server. Check your answer manually.');
+  }
+  setBtnLoading(btn, false);
+}
+
+// ── CHECK PART B ──
+async function checkPartB(btn, i) {
+  const sit = document.getElementById(`b${i}-sit`).value;
+  const em1 = document.getElementById(`b${i}-em1`).value.trim();
+  const em2 = document.getElementById(`b${i}-em2`).value.trim();
+  const diff = document.getElementById(`b${i}-diff`).value.trim();
+  if (!sit || !em1 || !em2 || !diff) {
+    showFeedback(`b${i}-fb`,'warn','⚠️ Please fill in all fields.'); return;
+  }
+  setBtnLoading(btn, true);
+  try {
+    const result = await callClaude(`
+Situation: "${sit}"
+Student wrote: "I might feel ${em1}, but I could also feel ${em2}. The difference is that ${diff}."
+
+Evaluate:
+1. Are both emotions appropriate for the situation?
+2. Are the two emotions genuinely different (not synonyms)?
+3. Does the "difference" explanation make logical sense and show nuance?
+4. Grammar quality?
+
+Reply JSON: { "ok": true/false, "score": 0-10, "feedback": "2 sentences max", "suggestion": "improvement tip or empty" }`);
+    const cls = result.ok ? 'ok' : (result.score >= 6 ? 'warn' : 'err');
+    let msg = `<strong>${result.ok ? '✅' : '⚠️'} ${result.score}/10</strong> — ${result.feedback}`;
+    if (result.suggestion) msg += `<br><em>💡 ${result.suggestion}</em>`;
+    showFeedback(`b${i}-fb`, cls, msg);
+  } catch(e) {
+    showFeedback(`b${i}-fb`,'warn','Feedback unavailable. Review manually.');
+  }
+  setBtnLoading(btn, false);
+}
+
+// ── CHECK PART C ──
+async function checkPartC(btn, i) {
+  const sit = document.getElementById(`c${i}-sit`).value;
+  const scale = scaleVals[i];
+  const em1 = document.getElementById(`c${i}-em1`).value.trim();
+  const cond = document.getElementById(`c${i}-cond`).value.trim();
+  const em2 = document.getElementById(`c${i}-em2`).value.trim();
+  if (!sit || !scale || !em1 || !cond || !em2) {
+    showFeedback(`c${i}-fb`,'warn','⚠️ Please fill in all fields and select intensity.'); return;
+  }
+  setBtnLoading(btn, true);
+  try {
+    const result = await callClaude(`
+Situation: "${sit}" — Intensity rated: ${scale}/5
+Student wrote: "At first I would feel ${em1}, but if ${cond}, I would become ${em2}."
+
+Evaluate:
+1. Is the initial emotion (${em1}) appropriate?
+2. Is the second emotion (${em2}) genuinely stronger/more intense?
+3. Is the conditional clause ("if ${cond}") logical and grammatically acceptable?
+4. Does the intensity rating (${scale}/5) match the situation?
+
+Reply JSON: { "ok": true/false, "score": 0-10, "feedback": "2 sentences", "suggestion": "tip or empty" }`);
+    const cls = result.ok ? 'ok' : (result.score >= 6 ? 'warn' : 'err');
+    let msg = `<strong>${result.ok ? '✅' : '⚠️'} ${result.score}/10</strong> — ${result.feedback}`;
+    if (result.suggestion) msg += `<br><em>💡 ${result.suggestion}</em>`;
+    showFeedback(`c${i}-fb`, cls, msg);
+  } catch(e) {
+    showFeedback(`c${i}-fb`,'warn','Feedback unavailable.');
+  }
+  setBtnLoading(btn, false);
+}
+
+// ── CHECK PART D ──
+async function checkPartD(btn, i) {
+  const sit = document.getElementById(`d${i}-sit`).value;
+  const type = document.getElementById(`d${i}-type`).value;
+  const sent = document.getElementById(`d${i}-sent`).value.trim();
+  if (!sit || !sent) {
+    showFeedback(`d${i}-fb`,'warn','⚠️ Please choose a situation and write a sentence.'); return;
+  }
+  setBtnLoading(btn, true);
+  try {
+    const result = await callClaude(`
+Situation: "${sit}"
+Conditional type chosen: ${type === 'present' ? 'Type 1 (If + Past Simple → would + verb)' : 'Type 2 (If + Past Perfect → would have + p.p.)'}
+Student wrote: "${sent}"
+
+Evaluate:
+1. Is the conditional structure correct for the chosen type?
+2. Does the sentence relate to the situation?
+3. Is an emotion or emotional response expressed?
+4. Grammar quality?
+
+Reply JSON: { "ok": true/false, "score": 0-10, "feedback": "2 sentences", "suggestion": "grammar correction or tip if needed, or empty" }`);
+    const cls = result.ok ? 'ok' : (result.score >= 6 ? 'warn' : 'err');
+    let msg = `<strong>${result.ok ? '✅' : '⚠️'} ${result.score}/10</strong> — ${result.feedback}`;
+    if (result.suggestion) msg += `<br><em>💡 ${result.suggestion}</em>`;
+    showFeedback(`d${i}-fb`, cls, msg);
+  } catch(e) {
+    showFeedback(`d${i}-fb`,'warn','Feedback unavailable.');
+  }
+  setBtnLoading(btn, false);
+}
+
+// ── CHECK PART E ──
+async function checkPartE(btn) {
+  const sit = document.getElementById('partE-sit').value;
+  const text = document.getElementById('partE-text').value.trim();
+  if (!sit || !text) { showFeedback('partE-fb','warn','⚠️ Choose a situation and write your paragraph.'); return; }
+  const words = text.split(/\s+/).length;
+  if (words < 30) { showFeedback('partE-fb','warn',`⚠️ Your paragraph is too short (${words} words). Aim for 8–10 lines.`); return; }
+  setBtnLoading(btn, true);
+  try {
+    const result = await callClaude(`
+Situation chosen: "${sit}"
+Paragraph: "${text}"
+Word bank emotions: ${WORDBANK.join(', ')}
+
+Evaluate (be encouraging, Grade 8 level):
+1. Are at least 3 emotion words from the word bank used appropriately?
+2. Is at least 1 intensifier used?
+3. Is at least 1 contrast word (however/although/on the other hand) used?
+4. Does the paragraph make sense and relate to the situation?
+5. Grammar and vocabulary quality?
+6. Approximate length (should be 8-10 lines)?
+
+Reply JSON: { "ok": true/false, "score": 0-20, "emotions_found": ["list","of","emotions","found"], "has_intensifier": true/false, "has_contrast": true/false, "feedback": "3 sentences", "suggestion": "improvement or empty" }`);
+    const cls = result.ok ? 'ok' : (result.score >= 14 ? 'warn' : 'err');
+    let msg = `<strong>${result.ok ? '✅' : '⚠️'} ${result.score}/20</strong> — ${result.feedback}`;
+    if (result.emotions_found?.length) msg += `<br>🎯 Emotions found: <em>${result.emotions_found.join(', ')}</em>`;
+    msg += `<br>${result.has_intensifier ? '✅' : '❌'} Intensifier &nbsp;&nbsp; ${result.has_contrast ? '✅' : '❌'} Contrast word`;
+    if (result.suggestion) msg += `<br><em>💡 ${result.suggestion}</em>`;
+    showFeedback('partE-fb', cls, msg);
+  } catch(e) {
+    showFeedback('partE-fb','warn','Feedback unavailable.');
+  }
+  setBtnLoading(btn, false);
+}
+
+// ── FINAL SUBMIT ──
+async function submitAll() {
+  document.getElementById('loadingOverlay').style.display = 'flex';
+  document.getElementById('submitBtn').disabled = true;
+
+  // Collect everything
+  let partAData = [];
+  for (let i=0; i<15; i++) {
+    partAData.push({
+      situation: SITUATIONS[i],
+      feel: document.getElementById(`a${i}-feel`)?.value.trim()||'',
+      because: document.getElementById(`a${i}-because`)?.value.trim()||'',
+      intensifier: document.getElementById(`a${i}-int`)?.value.trim()||'',
+      feel2: document.getElementById(`a${i}-feel2`)?.value.trim()||''
+    });
+  }
+  let partBData = [];
+  for (let i=0; i<5; i++) {
+    partBData.push({
+      situation: document.getElementById(`b${i}-sit`)?.value||'',
+      em1: document.getElementById(`b${i}-em1`)?.value.trim()||'',
+      em2: document.getElementById(`b${i}-em2`)?.value.trim()||'',
+      diff: document.getElementById(`b${i}-diff`)?.value.trim()||''
+    });
+  }
+  let partCData = [];
+  for (let i=0; i<6; i++) {
+    partCData.push({
+      situation: document.getElementById(`c${i}-sit`)?.value||'',
+      scale: scaleVals[i]||0,
+      em1: document.getElementById(`c${i}-em1`)?.value.trim()||'',
+      cond: document.getElementById(`c${i}-cond`)?.value.trim()||'',
+      em2: document.getElementById(`c${i}-em2`)?.value.trim()||''
+    });
+  }
+  let partDData = [];
+  for (let i=0; i<4; i++) {
+    partDData.push({
+      situation: document.getElementById(`d${i}-sit`)?.value||'',
+      type: document.getElementById(`d${i}-type`)?.value||'',
+      sentence: document.getElementById(`d${i}-sent`)?.value.trim()||''
+    });
+  }
+  const partEData = {
+    situation: document.getElementById('partE-sit')?.value||'',
+    paragraph: document.getElementById('partE-text')?.value.trim()||''
+  };
+
+  try {
+    const result = await callClaude(`
+You are marking a complete Grade 8 English worksheet on Feelings & Emotions.
+Be fair, moderately lenient (accept any logical/grammatically correct answer).
+Score each part out of the max given.
+
+PART A (max 30): 15 items, each rated /2. Award 2 if emotion+justification+intensifier all logical. Award 1 if mostly OK with minor issues.
+${partAData.map((d,i)=>`${i+1}. Situation: "${d.situation}" → feel: "${d.feel}", because: "${d.because}", intensifier: "${d.intensifier}", feel2: "${d.feel2}"`).join('\n')}
+
+PART B (max 20): 5 items, each /4. Award full marks for 2 different logical emotions + clear distinction.
+${partBData.map((d,i)=>`${i+1}. Situation: "${d.situation}" → em1: "${d.em1}", em2: "${d.em2}", difference: "${d.diff}"`).join('\n')}
+
+PART C (max 18): 6 items, each /3. Award full if: correct intensity, logical emotion pair, valid conditional.
+${partCData.map((d,i)=>`${i+1}. Situation: "${d.situation}" scale:${d.scale}/5 → at first: "${d.em1}", if "${d.cond}", become: "${d.em2}"`).join('\n')}
+
+PART D (max 12): 4 items, each /3. Award for correct conditional structure + relevant emotion.
+${partDData.map((d,i)=>`${i+1}. Situation: "${d.situation}" [${d.type}] → "${d.sentence}"`).join('\n')}
+
+PART E (max 20): 1 paragraph. Award proportionally for: 3+ emotions (6pts), intensifier (4pts), contrast word (4pts), logic/flow (6pts).
+Situation: "${partEData.situation}"
+Paragraph: "${partEData.paragraph}"
+
+IMPORTANT: If a student left a section blank or wrote nothing meaningful, score that section 0.
+Provide total out of 100.
+
+Reply JSON only:
+{
+  "partA": <score 0-30>,
+  "partB": <score 0-20>,
+  "partC": <score 0-18>,
+  "partD": <score 0-12>,
+  "partE": <score 0-20>,
+  "total": <sum 0-100>,
+  "strengths": "one sentence",
+  "weaknesses": "one sentence with what to improve"
+}`);
+
+    document.getElementById('loadingOverlay').style.display = 'none';
+    const panel = document.getElementById('score-panel');
+    const card = document.getElementById('scoreCard');
+    panel.style.display = 'block';
+    panel.scrollIntoView({behavior:'smooth', block:'start'});
+
+    const score = result.total;
+    document.getElementById('scoreNum').textContent = score;
+    card.className = `score-card ${score >= 80 ? 'pass' : 'fail'}`;
+
+    if (score >= 80) {
+      document.getElementById('scoreMsg').textContent = score >= 95 ? '🏆 Outstanding!' : score >= 90 ? '⭐ Excellent work!' : '🎉 Well done — you passed!';
+      document.getElementById('scoreDetail').innerHTML =
+        `<strong>Part A:</strong> ${result.partA}/30 &nbsp;|&nbsp; <strong>Part B:</strong> ${result.partB}/20 &nbsp;|&nbsp; <strong>Part C:</strong> ${result.partC}/18<br>
+         <strong>Part D:</strong> ${result.partD}/12 &nbsp;|&nbsp; <strong>Part E:</strong> ${result.partE}/20<br><br>
+         💪 ${result.strengths}`;
+    } else {
+      document.getElementById('scoreMsg').textContent = '📖 Not quite — please review and try again';
+      document.getElementById('scoreDetail').innerHTML =
+        `<strong>Part A:</strong> ${result.partA}/30 &nbsp;|&nbsp; <strong>Part B:</strong> ${result.partB}/20 &nbsp;|&nbsp; <strong>Part C:</strong> ${result.partC}/18<br>
+         <strong>Part D:</strong> ${result.partD}/12 &nbsp;|&nbsp; <strong>Part E:</strong> ${result.partE}/20<br><br>
+         💡 Focus on: ${result.weaknesses}`;
+      document.getElementById('retryBtn').style.display = 'inline-block';
+    }
+  } catch(e) {
+    document.getElementById('loadingOverlay').style.display = 'none';
+    document.getElementById('submitBtn').disabled = false;
+    alert('Could not reach the marking server. Please try again.');
+  }
+}
+
+function retryExam() {
+  document.getElementById('score-panel').style.display = 'none';
+  document.getElementById('submitBtn').disabled = false;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Datalists
+document.addEventListener('DOMContentLoaded', () => {
+  const wb = document.createElement('datalist');
+  wb.id = 'wb-list';
+  WORDBANK.forEach(w => { const o = document.createElement('option'); o.value = w; wb.appendChild(o); });
+  document.body.appendChild(wb);
+
+  const il = document.createElement('datalist');
+  il.id = 'int-list';
+  INTENSIFIERS.forEach(w => { const o = document.createElement('option'); o.value = w; il.appendChild(o); });
+  document.body.appendChild(il);
+
+  buildPartA();
+  buildPartB();
+  buildPartC();
+  buildPartD();
+  updateProgress();
+});
+
+document.getElementById('partE-text').addEventListener('input', () => {
+  updateCounter('partE-text','partE-counter');
+  updateProgress();
+});
+</script>
+</body>
+</html>
