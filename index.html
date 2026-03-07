@@ -777,9 +777,9 @@ function checkPartA(btn, i) {
     tips.push(`Think about how you would <em>really</em> feel if ${SITUATIONS[i]}.`);
   }
 
-  // Check justification has a connective
-  if (!hasConjunction(because)) {
-    issues.push('your justification should include a connective word (because / since / as)');
+  // Check justification is meaningful (the word "because" is already in the template)
+  if (because.length < 5) {
+    issues.push('your justification is too short — explain your reason in more detail');
   }
 
   // Check intensifier
