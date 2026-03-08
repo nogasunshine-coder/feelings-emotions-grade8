@@ -398,7 +398,7 @@
       <div class="part-num">A</div>
       <div class="part-title-block">
         <h2>Choose + Justify</h2>
-        <p>Choose a feeling, write a justification using <em>because / since / as / so</em>, and add an intensifier.</p>
+        <p>Pick <strong>5</strong> situations. Choose a feeling, write a justification using <em>because / since / as / so</em>, and add an intensifier.</p>
       </div>
       <span class="required-badge">✱ Required</span>
     </div>
@@ -587,14 +587,19 @@ function copyWord(chip) {
 // ── BUILD PART A ──
 function buildPartA() {
   const c = document.getElementById('partA-items');
-  SITUATIONS.forEach((sit, i) => {
+  c.innerHTML = `<div class="choose-banner">📌 Choose any <strong>5</strong> situations below and complete each one.</div>`;
+  for (let i = 0; i < 5; i++) {
     const div = document.createElement('div');
     div.className = 'item-block';
     div.innerHTML = `
       <div class="item-question">
         <span class="item-num">${i+1}</span>
-        <span>…${sit}.</span>
+        <span>Choose a situation:</span>
       </div>
+      <select class="situation-select" id="a${i}-sit" onchange="updateProgress()">
+        <option value="">— choose a situation —</option>
+        ${SITUATIONS.map((s,idx) => `<option value="${idx}">…${s}</option>`).join('')}
+      </select>
       <div class="sentence-frame">
         <span class="frame-text">I would feel </span><input class="fill-input" id="a${i}-feel" placeholder="emotion" list="wb-list" oninput="updateProgress()">
         <span class="frame-text"> because </span><input class="fill-input wide" id="a${i}-because" placeholder="your reason here..." oninput="updateProgress()">
@@ -606,7 +611,7 @@ function buildPartA() {
       </button>
       <div class="feedback-box" id="a${i}-fb"></div>`;
     c.appendChild(div);
-  });
+  }
 }
 
 // ── BUILD PART B ──
@@ -723,8 +728,8 @@ function updateCounter() {
 // ── PROGRESS ──
 function updateProgress() {
   let filled = 0, total = 0;
-  for (let i = 0; i < 15; i++) {
-    ['feel','because','int','feel2'].forEach(f => {
+  for (let i = 0; i < 5; i++) {
+    ['sit','feel','because','int','feel2'].forEach(f => {
       total++;
       if ((document.getElementById(`a${i}-${f}`)?.value || '').trim()) filled++;
     });
@@ -759,11 +764,15 @@ function setBtnLoading(btn, on) {
 
 // ── LOCAL CHECK: PART A ──
 function checkPartA(btn, i) {
+  const sitIdx = parseInt(document.getElementById(`a${i}-sit`).value);
   const feel   = (document.getElementById(`a${i}-feel`).value || '').trim();
   const because= (document.getElementById(`a${i}-because`).value || '').trim();
   const intens = (document.getElementById(`a${i}-int`).value || '').trim();
   const feel2  = (document.getElementById(`a${i}-feel2`).value || '').trim();
 
+  if (isNaN(sitIdx)) {
+    showFeedback(`a${i}-fb`, 'warn', '⚠️ Please choose a situation first.'); return;
+  }
   if (!feel || !because || !intens || !feel2) {
     showFeedback(`a${i}-fb`, 'warn', '⚠️ Please fill in all four blanks first.'); return;
   }
@@ -772,9 +781,9 @@ function checkPartA(btn, i) {
   const tips = [];
 
   // Check emotion 1
-  if (!isGoodEmotion(i, feel)) {
+  if (!isGoodEmotion(sitIdx, feel)) {
     issues.push(`"${feel}" might not be the best fit for this situation`);
-    tips.push(`Think about how you would <em>really</em> feel if ${SITUATIONS[i]}.`);
+    tips.push(`Think about how you would <em>really</em> feel if ${SITUATIONS[sitIdx]}.`);
   }
 
   // Check justification is meaningful (the word "because" is already in the template)
@@ -946,15 +955,16 @@ function checkPartE(btn) {
 // ── SCORE CALCULATION ──
 function scorePartA() {
   let score = 0;
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 5; i++) {
+    const sitIdx = parseInt(document.getElementById(`a${i}-sit`)?.value || '');
     const feel   = (document.getElementById(`a${i}-feel`)?.value||'').trim();
     const because= (document.getElementById(`a${i}-because`)?.value||'').trim();
     const intens = (document.getElementById(`a${i}-int`)?.value||'').trim();
     const feel2  = (document.getElementById(`a${i}-feel2`)?.value||'').trim();
-    if (!feel || !because) continue;
+    if (isNaN(sitIdx) || !feel || !because) continue;
     let pts = 0;
-    if (isGoodEmotion(i, feel)) pts++;
-    if (hasConjunction(because) && because.length > 5) pts += 0.5;
+    if (isGoodEmotion(sitIdx, feel)) pts++;
+    if (because.length > 5) pts += 0.5;
     if (isIntensifier(intens)) pts += 0.3;
     if (feel2 && (WORDBANK.includes(feel2.toLowerCase()) || feel2.length > 3)) pts += 0.2;
     score += Math.min(pts, 2);
