@@ -1038,18 +1038,14 @@ function submitAll() {
     const a = scorePartA();
     const b = scorePartB();
     const c = scorePartC();
-    const d = scorePartD(); // bonus
-    const e = scorePartE(); // bonus
+    const d = scorePartD(); // bonus only
+    const e = scorePartE(); // bonus only
 
-    // Base score out of 68 (parts A+B+C), then add bonus capped at 100
+    // Score is 100% based on A+B+C only (max 68 raw → scaled to 100)
     const baseMax = 68;
     const base = a + b + c;
-    const bonus = d + e; // max 32
-    const rawTotal = base + bonus;
-
-    // Normalise: if base parts alone give 68, that's 68/68 * 80 = 80. Bonus adds up to 20.
-    const normalised = Math.round((base / baseMax) * 80) + Math.round((bonus / 32) * 20);
-    const total = Math.min(normalised, 100);
+    const total = Math.min(Math.round((base / baseMax) * 100), 100);
+    const bonus = d + e; // shown separately, does NOT affect main score
 
     document.getElementById('loadingOverlay').classList.remove('active');
     const panel = document.getElementById('score-panel');
@@ -1060,7 +1056,10 @@ function submitAll() {
     document.getElementById('scoreNum').textContent = total;
     card.className = `score-card ${total >= 80 ? 'pass' : 'fail'}`;
 
-    const partBreakdown = `<strong>Part A:</strong> ${a}/30 &nbsp;|&nbsp; <strong>Part B:</strong> ${b}/20 &nbsp;|&nbsp; <strong>Part C:</strong> ${c}/18<br><strong>Part D (bonus):</strong> ${d}/12 &nbsp;|&nbsp; <strong>Part E (bonus):</strong> ${e}/20`;
+    const bonusLine = bonus > 0
+      ? `<br><br>⭐ <strong>Bonus (Parts D+E):</strong> +${bonus} pts <em style="opacity:0.7">(not counted in score)</em>`
+      : `<br><br><em style="opacity:0.5">Parts D & E not attempted — optional bonus</em>`;
+    const partBreakdown = `<strong>Part A:</strong> ${a}/30 &nbsp;|&nbsp; <strong>Part B:</strong> ${b}/20 &nbsp;|&nbsp; <strong>Part C:</strong> ${c}/18${bonusLine}`;
 
     if (total >= 80) {
       document.getElementById('scoreMsg').textContent = total >= 95 ? '🏆 Outstanding!' : total >= 90 ? '⭐ Excellent work!' : '🎉 Well done — you passed!';
