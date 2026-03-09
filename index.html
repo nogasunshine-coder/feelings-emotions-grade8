@@ -363,6 +363,10 @@
   </div>
 </div>
 
+<div id="restore-banner" style="display:none;background:#e8f5e9;border-bottom:2px solid #81c784;padding:12px 40px;font-size:13px;color:#2e7d32;display:flex;align-items:center;gap:12px">
+  <span>✅ <strong>Your previous answers have been restored.</strong> You can continue where you left off.</span>
+  <button onclick="clearStorage()" style="margin-left:auto;background:none;border:1px solid #81c784;color:#2e7d32;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:12px">🗑 Clear &amp; start over</button>
+</div>
 <div class="hero">
   <div class="hero-badge">English · Grade 8 · Advanced</div>
   <h1>Feelings &amp; Emotions</h1>
@@ -747,6 +751,96 @@ function updateProgress() {
   const pct = Math.round((filled / total) * 100);
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('progressPct').textContent = pct + '% complete';
+  saveToStorage();
+}
+
+// ── LOCAL STORAGE ──
+const STORAGE_KEY = 'feelings_emotions_g8';
+
+function saveToStorage() {
+  const data = {};
+  // Part A
+  for (let i = 0; i < 5; i++) {
+    ['sit','feel','because','int','feel2'].forEach(f => {
+      const el = document.getElementById(`a${i}-${f}`);
+      if (el) data[`a${i}-${f}`] = el.value;
+    });
+  }
+  // Part B
+  for (let i = 0; i < 5; i++) {
+    ['sit','em1','em2','diff'].forEach(f => {
+      const el = document.getElementById(`b${i}-${f}`);
+      if (el) data[`b${i}-${f}`] = el.value;
+    });
+  }
+  // Part C
+  for (let i = 0; i < 6; i++) {
+    ['sit','em1','cond','em2'].forEach(f => {
+      const el = document.getElementById(`c${i}-${f}`);
+      if (el) data[`c${i}-${f}`] = el.value;
+    });
+    if (scaleVals[i]) data[`c${i}-scale`] = scaleVals[i];
+  }
+  // Part D
+  for (let i = 0; i < 4; i++) {
+    ['sit','type','sent'].forEach(f => {
+      const el = document.getElementById(`d${i}-${f}`);
+      if (el) data[`d${i}-${f}`] = el.value;
+    });
+  }
+  // Part E
+  const eSit = document.getElementById('partE-sit');
+  const eTxt = document.getElementById('partE-text');
+  if (eSit) data['e-sit'] = eSit.value;
+  if (eTxt) data['e-text'] = eTxt.value;
+
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadFromStorage() {
+  let data;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch(e) { return; }
+  if (!data) return;
+
+  // Part A
+  for (let i = 0; i < 5; i++) {
+    ['sit','feel','because','int','feel2'].forEach(f => {
+      const el = document.getElementById(`a${i}-${f}`);
+      if (el && data[`a${i}-${f}`] !== undefined) el.value = data[`a${i}-${f}`];
+    });
+  }
+  // Part B
+  for (let i = 0; i < 5; i++) {
+    ['sit','em1','em2','diff'].forEach(f => {
+      const el = document.getElementById(`b${i}-${f}`);
+      if (el && data[`b${i}-${f}`] !== undefined) el.value = data[`b${i}-${f}`];
+    });
+  }
+  // Part C
+  for (let i = 0; i < 6; i++) {
+    ['sit','em1','cond','em2'].forEach(f => {
+      const el = document.getElementById(`c${i}-${f}`);
+      if (el && data[`c${i}-${f}`] !== undefined) el.value = data[`c${i}-${f}`];
+    });
+    if (data[`c${i}-scale`]) setScale(i, data[`c${i}-scale`]);
+  }
+  // Part D
+  for (let i = 0; i < 4; i++) {
+    ['sit','type','sent'].forEach(f => {
+      const el = document.getElementById(`d${i}-${f}`);
+      if (el && data[`d${i}-${f}`] !== undefined) el.value = data[`d${i}-${f}`];
+    });
+  }
+  // Part E
+  const eSit = document.getElementById('partE-sit');
+  const eTxt = document.getElementById('partE-text');
+  if (eSit && data['e-sit'] !== undefined) eSit.value = data['e-sit'];
+  if (eTxt && data['e-text'] !== undefined) { eTxt.value = data['e-text']; updateCounter(); }
+
+  updateProgress();
+  // Show restore banner
+  const banner = document.getElementById('restore-banner');
+  if (banner && Object.keys(data).length > 0) banner.style.display = 'block';
 }
 
 // ── FEEDBACK HELPERS ──
@@ -969,7 +1063,7 @@ function scorePartA() {
     if (feel2 && (WORDBANK.includes(feel2.toLowerCase()) || feel2.length > 3)) pts += 0.2;
     score += Math.min(pts, 2);
   }
-  return Math.round(Math.min(score, 30));
+  return Math.round(Math.min(score, 10));
 }
 
 function scorePartB() {
@@ -1051,8 +1145,8 @@ function submitAll() {
     const d = scorePartD(); // bonus only
     const e = scorePartE(); // bonus only
 
-    // Score is 100% based on A+B+C only (max 68 raw → scaled to 100)
-    const baseMax = 68;
+    // Score is 100% based on A+B+C only (A=10, B=20, C=18 → max 48 raw → scaled to 100)
+    const baseMax = 48;
     const base = a + b + c;
     const total = Math.min(Math.round((base / baseMax) * 100), 100);
     const bonus = d + e; // shown separately, does NOT affect main score
@@ -1069,7 +1163,7 @@ function submitAll() {
     const bonusLine = bonus > 0
       ? `<br><br>⭐ <strong>Bonus (Parts D+E):</strong> +${bonus} pts <em style="opacity:0.7">(not counted in score)</em>`
       : `<br><br><em style="opacity:0.5">Parts D & E not attempted — optional bonus</em>`;
-    const partBreakdown = `<strong>Part A:</strong> ${a}/30 &nbsp;|&nbsp; <strong>Part B:</strong> ${b}/20 &nbsp;|&nbsp; <strong>Part C:</strong> ${c}/18${bonusLine}`;
+    const partBreakdown = `<strong>Part A:</strong> ${a}/10 &nbsp;|&nbsp; <strong>Part B:</strong> ${b}/20 &nbsp;|&nbsp; <strong>Part C:</strong> ${c}/18${bonusLine}`;
 
     if (total >= 80) {
       document.getElementById('scoreMsg').textContent = total >= 95 ? '🏆 Outstanding!' : total >= 90 ? '⭐ Excellent work!' : '🎉 Well done — you passed!';
@@ -1088,6 +1182,11 @@ function retryExam() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function clearStorage() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  location.reload();
+}
+
 // INIT
 document.addEventListener('DOMContentLoaded', () => {
   buildDataLists();
@@ -1095,6 +1194,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildPartB();
   buildPartC();
   buildPartD();
+  loadFromStorage();
   updateProgress();
 });
 </script>
